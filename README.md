@@ -9,7 +9,7 @@ npm init
 npm install [package-name] --save
 ```
 
-__Spotify API__ is used as well, so you may want to check it out. (https://developer.spotify.com/documentation/web-api/).
+__Spotify API__ (https://developer.spotify.com/documentation/web-api/) is used as well, so you may want to check it out.
 
 # Files
 * "/server.js"
