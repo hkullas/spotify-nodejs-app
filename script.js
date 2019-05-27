@@ -81,7 +81,9 @@ function f_initialize() {
         
         el.addEventListener("mouseover", () => {
             // Check if 'selected_id' is the same than 'list[i].id' value.
-            // REASON: 'mouseover' event triggers all the time when the 'mouseover' happens again after coming back from the top of other elements which are inside the main list element.
+            /* REASON: 'mouseover' event triggers all the time when the 'mouseover'
+            happens again after coming back from the top of other
+            elements which are inside the main list element. */
             if(selected_id != list[i].id) {
                 list[i].style.border = "4px solid var(--theme-color)";
                 list[i].children[0].style.visibility = "visible";
