@@ -8,7 +8,6 @@
     Heikki Kullas (c) 2019
 */
 
-// REQUIREMENTS
 const express = require("express");
 
 const app = express();
@@ -16,17 +15,15 @@ const async = require("async");
 const bodyParser = require("body-parser");
 const request = require("request");
 
-// CONSTS & LETS
 let _data;
 
-// YOUR SPOTIFY API CLIENT ID & SECRET
+/*
+    Do NOT share these with anyone. If compromised, get another one!
+*/
 const client_id = "[CLIENT_ID]";
 const client_secret = "[CLIENT_SECRET]";
 
-// PORT
 const PORT = 5000;
-
-// SPOTIFY API AUTHENTICATION
 const auth_ops = {
     url: "https://accounts.spotify.com/api/token",
     headers: {
@@ -38,26 +35,21 @@ const auth_ops = {
     json: true
 }
 
-// SETTING UP THE EXPRESS
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 
-// EJS GET METHOD
 app.get("/", (req, res) => {
     res.render("index.ejs", {
         data: _data
     });
 });
 
-// EJS POST METHOD 01
 app.post("/search", (req, res) => {
-    // Use asynchronous to get all the data (pretty much a must have with Spotify API).
     async.parallel({
         one: (callback) => {
             request.post(auth_ops, (err, res, body) => {
                 if (!err && res.statusCode === 200) {
-                    // If the search field is empty, get currently popular results instead.
                     const query = req.body.search === "" ? "year:0000-9999" : req.body.search;
                     const ops = {
                         url: `https://api.spotify.com/v1/search?q=${query}&type=artist&limit=50`,
@@ -67,7 +59,6 @@ app.post("/search", (req, res) => {
                         json: true
                     }
         
-                    // Get the request to _data which is sent to EJS.
                     request.get(ops, (err, res, body) => {
                         _data = body.artists.items;
                         callback(null, 1);
@@ -77,15 +68,12 @@ app.post("/search", (req, res) => {
         }
     },
     
-    // Redirect back to root (/)
     (err, _res) => {    
         res.redirect("/");
     });
 });
 
-// EJS POST METHOD 02
 app.post("/similar", (req, res) => {
-    // Use asynchronous to get all the data (pretty much a must have with Spotify API).
     async.parallel({
         one: (callback) => {
             request.post(auth_ops, (err, res, body) => {
@@ -98,7 +86,6 @@ app.post("/similar", (req, res) => {
                         json: true
                     }
 
-                    // Get the request to _data which is sent to EJS.
                     request.get(ops, (err, res, body) => {
                         _data = body.artists;
                         callback(null, 1);
@@ -108,12 +95,10 @@ app.post("/similar", (req, res) => {
         }
     },
     
-    // Redirect back to root (/)
     (err, _res) => {
         res.redirect("/");
     });
 });
 
-// When the application is launched in CMD, listen to the PORT (5000) and inform the user.
 console.log("Listening to port", PORT);
 app.listen(PORT);
