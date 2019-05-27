@@ -3,7 +3,7 @@
     A simple Spotify application to search for similar bands and artists.
     ---
     Files: "/server.js", "/public/script.js", "/public/style.css" & "/views/index.ejs"
-    Used: HTML, JavaScript, CSS & Node.JS (express, async, body-parser & request)
+    Used: HTML, JavaScript, CSS & Node.JS
     ---
     Heikki Kullas (c) 2019
 */
@@ -52,11 +52,12 @@ app.get("/", (req, res) => {
 
 // EJS POST METHOD 01
 app.post("/search", (req, res) => {
-    // 
+    // Use asynchronous to get all the data (pretty much a must have with Spotify API).
     async.parallel({
         one: (callback) => {
             request.post(auth_ops, (err, res, body) => {
                 if (!err && res.statusCode === 200) {
+                    // If the search field is empty, get currently popular results instead.
                     const query = req.body.search === "" ? "year:0000-9999" : req.body.search;
                     const ops = {
                         url: `https://api.spotify.com/v1/search?q=${query}&type=artist&limit=50`,
@@ -66,6 +67,7 @@ app.post("/search", (req, res) => {
                         json: true
                     }
         
+                    // Get the request to _data which is sent to EJS.
                     request.get(ops, (err, res, body) => {
                         _data = body.artists.items;
                         callback(null, 1);
@@ -75,6 +77,7 @@ app.post("/search", (req, res) => {
         }
     },
     
+    // Redirect back to root (/)
     (err, _res) => {    
         res.redirect("/");
     });
@@ -82,6 +85,7 @@ app.post("/search", (req, res) => {
 
 // EJS POST METHOD 02
 app.post("/similar", (req, res) => {
+    // Use asynchronous to get all the data (pretty much a must have with Spotify API).
     async.parallel({
         one: (callback) => {
             request.post(auth_ops, (err, res, body) => {
@@ -94,6 +98,7 @@ app.post("/similar", (req, res) => {
                         json: true
                     }
 
+                    // Get the request to _data which is sent to EJS.
                     request.get(ops, (err, res, body) => {
                         _data = body.artists;
                         callback(null, 1);
@@ -103,10 +108,12 @@ app.post("/similar", (req, res) => {
         }
     },
     
+    // Redirect back to root (/)
     (err, _res) => {
         res.redirect("/");
     });
 });
 
+// When the application is launched in CMD, listen to the PORT (5000) and inform the user.
 console.log("Listening to port", PORT);
 app.listen(PORT);
