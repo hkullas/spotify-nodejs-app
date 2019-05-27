@@ -2,7 +2,9 @@
 A simple Spotify application to search for similar bands and artists.
 
 # Requirements
-__Node.JS__ is required for this application. (https://nodejs.org/en/). Also _'express'_, _'async'_, _'body-parser'_ and _'request'_ packages are required:
+__Node.JS__ is required for this application. (https://nodejs.org/en/).
+
+Also _'express'_, _'async'_, _'body-parser'_ and _'request'_ packages are required (do this with CMD and inside the root directory):
 
 ```
 npm init
