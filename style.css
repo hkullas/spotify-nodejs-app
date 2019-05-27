@@ -1,0 +1,96 @@
+/*
+    Discover New Music
+    A simple Spotify application to search for similar bands and artists.
+    ---
+    Files: "/server.js", "/public/script.js", "/public/style.css" & "/views/index.ejs"
+    Used: HTML, JavaScript, CSS & Node.JS
+    ---
+    Heikki Kullas (c) 2019
+*/
+
+/* TAGS */
+
+body {
+    background-color: var(--background-color-b);
+    color: var(--font-color);
+    font-family: "Calibri";
+    font-size: 16px;
+    margin: 64px;
+}
+h1 {
+    border-bottom: 1px solid var(--theme-color);
+    color: var(--theme-color);
+}
+hr {
+    border-bottom: 1px dashed var(--theme-color);
+    border-top: 1px dashed rgba(0, 0, 0, 0);
+}
+input[type=search] {
+    border-bottom: 1px dashed var(--theme-color);
+}
+
+/* CLASSES */
+
+.button {
+    background-color: rgba(250, 250, 250, 0.5);
+    border: 2px solid var(--theme-color);
+    border-radius: 2px;
+    color: var(--font-color);
+    padding: 8px 16px 8px 16px;
+    margin-right: 8px;
+}
+.button:hover {
+    background-color: var(--theme-color-o);
+    color: var(--font-color);
+    cursor: pointer;
+}
+.fab, .fas {
+    color: var(--light-color);
+    margin: 0px 4px 0px 4px;
+}
+.fab:hover, .fas:hover {
+    color: var(--theme-color);
+}
+.icon {
+    background-color: var(--background-color-o);
+    border-radius: 4px;
+    margin-top: 8px;
+    padding: 8px;
+}
+span.img {
+    background-color: var(--background-color-s);
+    border: 1px solid var(--border-color);
+    color: var(--font-color);
+    margin-right: 8px;
+    padding: 16px;
+    text-shadow: 2px 2px 8px var(--theme-color);
+}
+.list {
+    float: left;
+    margin: 8px;
+}
+.list:hover {
+    cursor: pointer;
+}
+.search {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    border-bottom: 1px dashed var(--theme-color);
+    font-size: 16px;
+    width: 25%;
+}
+
+/* MISC. */
+
+:root {
+    --background-color-b: rgb(250, 250, 250);
+    --background-color-o: rgba(0, 0, 0, 0.7);
+    --background-color-s: rgb(225, 225, 225);
+    --border-color: rgb(200, 200, 200);
+    --font-color: rgb(50, 50, 50);
+    --light-color: rgb(200, 200, 200);
+    --theme-color: rgb(100, 100, 100);
+    --theme-color-o: rgba(100, 100, 100, 0.5);
+    --sub-color: rgb(50, 50, 50);
+    --sub-color-o: rgba(50, 50, 50, 0.5);
+}
