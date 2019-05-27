@@ -85,6 +85,7 @@ function f_initialize() {
             happens again after coming back from the top of other
             elements which are inside the main list element. */
             if(selected_id != list[i].id) {
+                // Restyle the current list element.
                 list[i].style.border = "4px solid var(--theme-color)";
                 list[i].children[0].style.visibility = "visible";
                 list[i].children[1].children[0].style.color = "var(--theme-color-o)";
@@ -101,6 +102,7 @@ function f_initialize() {
 
     similar.forEach((el, i) => {
         el.addEventListener("click", (e) => {
+            // Find similar artists to the current list item and reload the page.
             fetch(`/similar?id=${similar[i].id}`, { method: "POST" })
             .then((res) => {
                 window.location.reload(true);
