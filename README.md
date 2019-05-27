@@ -7,6 +7,7 @@ __Node.JS__ is required for this application. (https://nodejs.org/en/).
 Also __'express'__, __'async'__, __'body-parser'__ and __'request'__ packages are required _(via CMD in root directory)_:
 
 ```
+---
 Install the packages:
 
 npm init
