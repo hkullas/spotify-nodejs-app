@@ -11,6 +11,12 @@ npm install [package-name] --save
 
 __Spotify API__ (https://developer.spotify.com/documentation/web-api/) is used as well, so you may want to check it out.
 
+# Usage
+First, make sure all the packages and modules are correctly installed.
+
+1. Start the server: `node server.js`
+2. Go to http://localhost:5000 to use the application.
+
 # Files
 * "/server.js"
 * "/public/script.js"
