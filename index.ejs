@@ -1,0 +1,54 @@
+<!--
+    Discover New Music
+    A simple Spotify application to search for similar bands and artists.
+    ---
+    Files: "/server.js", "/public/script.js", "/public/style.css" & "/views/index.ejs"
+    Used: HTML, JavaScript, CSS & Node.JS
+    ---
+    Heikki Kullas (c) 2019
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body onload="f_initialize();">
+        <h1>Discover New Music</h1>
+        <form action="/search" method="POST">
+            <input class="search" name="search" placeholder="Search by artist or band name" size="30" type="text">
+            <input type="submit" id="search-form" style="visibility: hidden">
+        </form>
+        <br>
+        <p>
+            <label class="button" for="search-form" tabindex="0">Find</label>
+        </p>
+        <br>
+        <% if (data !== undefined) { %>
+        <div style="margin: -8px 0px 0px -8px;">
+            <% for (let i = 0; i < data.length; i++) { %>
+            <% if (data[i].images[0] && data[i].popularity > 0) { %>
+            <div id="<%= data[i].id %>" class="list" style="background-image: url('<%= data[i].images[0].url %>'); background-size: cover; border: 4px solid var(--border-color); border-radius: 4px; height: 300px; width: 300px; position: relative;">
+                <div style="visibility: hidden; background-color: var(--background-color-o); position: relative; left: 0px; top: 0px; width: 100%; height: 100%;">
+                    <div style="background-color: var(--theme-color); padding: 8px; text-align: center; position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <b><%= data[i].name %></b>
+                        <br>
+                        <%= data[i].genres[0] ? data[i].genres[0].charAt(0).toUpperCase() + data[i].genres[0].substring(1, data[i].genres[0].length) : '-' %>
+                        <br><i id="<%= data[i].uri %>" class="fab fa-spotify icon spotify"></i><i id="<%= data[i].id %>" class="fas fa-search icon similar"></i>
+                    </div>
+                </div>
+                <div style="position: absolute; right: 8px; bottom: 4px; width: 3em; height: 3em;">
+                    <i class="fas fa-3x fa-star" style="color: var(--background-color-o); position: absolute; transform: translate(-50%, -50%); left: 50%; top: 50%;"></i>
+                    <b style="text-shadow: 2px 2px 2px var(--font-color); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); color: var(--light-color); padding: 2px 0px 0px 6px;"><%= data[i].popularity %></b>
+                </div>
+            </div>
+            <% } %>
+            <% } %>
+        </div>
+        <% } else { %>
+        <div>No results.</div>
+        <% } %>
+    </body>
+    <script type="text/javascript" src="script.js"></script>
+</html>
